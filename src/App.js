@@ -1,23 +1,39 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import TextInputChange from './minComponents/TextInputChange';
+import OpenErrorMessageBox from './components/OpenErrorMessageBox';
+import MainComponent from './components/MainComponent';
+import SignIn from './components/SignIn'
 
 function App() {
+
+  const [iputStates, setInputStates] = React.useState([]);
+
+  const handleChangeData = (arg) => {
+    let baseData = iputStates;
+    let t = true;
+    for (let i = 0; i < baseData.length; i++) {
+      if(baseData[i].row == arg.row && baseData[i].col == arg.col){
+        baseData[i].value = arg.value;
+        t = false;
+      }
+    }
+    if(t) {
+      setInputStates(iputStates.concat([arg]));
+    } else {
+      setInputStates(baseData);
+    }
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <TextInputChange error={true} value="111" row="11" col="10" onChangeData={handleChangeData}/>
+      <br/>
+      <TextInputChange value="" row="12" col="16" onChangeData={handleChangeData}/>
+      <br/>
+      <OpenErrorMessageBox/> */}
+      {/* <MainComponent/> */}
+      <SignIn/>
     </div>
   );
 }
